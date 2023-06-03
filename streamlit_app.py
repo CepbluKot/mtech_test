@@ -37,6 +37,8 @@ def business_logic(init_df):
     df
 
 
+    st.markdown('### Анализ гипотезы: Мужчины пропускают в течение года более 2 рабочих дней (work_days) по болезни значимо чаще женщин')
+
     selected_group_of_men_df = df.loc[(df['Количество больничных дней'] > 2) & (df['Пол'] == 'М')]
 
     selecetd_group_of_women_df = df.loc[(df['Количество больничных дней'] > 2) & (df['Пол'] == 'Ж')]
@@ -49,6 +51,8 @@ def business_logic(init_df):
     st.text('Число людей по выбранным группам:')
     st.text('Мужчины: ' + str(amount_of_selected_men))
     st.text('Женщины: ' + str(amount_of_selected_women)) 
+
+    st.markdown('### В качестве метрики используем: отношение числа сотрудников каждой выбранной группы к общему числу сотрудников определенонго пола')
 
     amount_of_all_men = len(df.loc[(df['Пол'] == 'М')])
     amount_of_all_women = len(df.loc[(df['Пол'] == 'Ж')])
@@ -98,6 +102,10 @@ def business_logic(init_df):
 
     st.pyplot(fig)
 
+
+    st.markdown('### Для более подробной картины посмотрим распределение % сотрудников соответсвующих полов по числу больничных')
+
+    
     unique_amount_of_sick_days = selected_group_of_men_df['Количество больничных дней'].unique()
 
     percent_of_men_per_amount_of_sick_days = {}
@@ -150,6 +158,9 @@ def business_logic(init_df):
     st.pyplot(fig)
 
 
+    st.markdown('### Анализ гипотезы: Работники старше 35 лет (age) пропускают в течение года более 2 рабочих дней (work_days) по болезни значимо чаще своих более молодых коллег.')
+
+
     selected_group_of_olds_df = df.loc[(df['Возраст'] > 35) & (df['Количество больничных дней'] > 2)]
     selected_group_of_youngs_df = df.loc[(df['Возраст'] <= 35) & (df['Количество больничных дней'] > 2)]
 
@@ -161,6 +172,10 @@ def business_logic(init_df):
     st.text('Число людей по выбранным группам:')
     st.text('Cтарше 35: ' + str(amount_of_selected_olds))
     st.text('35 и младше: ' + str(amount_of_selected_youngs)) 
+
+
+    st.markdown('### В качестве метрики используем: отношение числа сотрудников каждой выбранной группы к общему числу сотрудников определеной возрастной группы')
+
 
     amount_of_all_olds = len(df.loc[(df['Возраст'] > 35)])
     amount_of_all_youngs = len(df.loc[(df['Возраст'] <= 35)])
@@ -205,6 +220,9 @@ def business_logic(init_df):
     plt.title("% от общего числа сотрудников соответвуюшей возрастной группы")
     # plt.show()
     st.pyplot(fig)
+
+
+    st.markdown('### Для более подробной картины посмотрим распределение % сотрудников соответсвующих возрастных групп по числу больничных')
 
 
     unique_amount_of_sick_days = selected_group_of_olds_df['Количество больничных дней'].unique()
